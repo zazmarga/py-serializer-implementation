@@ -1,5 +1,5 @@
 from django.contrib import admin
 
-from serializer_app.models import Car
+from car.models import Car
 
 admin.site.register(Car)

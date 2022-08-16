@@ -3,12 +3,12 @@ from django.db import models
 
 
 class Car(models.Model):
-    manufacturer = models.CharField(max_length=55)
-    model = models.CharField(max_length=55)
+    manufacturer = models.CharField(max_length=64)
+    model = models.CharField(max_length=64)
     horse_powers = models.PositiveSmallIntegerField(
         validators=[MaxValueValidator(1914), MinValueValidator(1)]
     )
-    needs_to_be_fixed = models.BooleanField()
+    is_broken = models.BooleanField()
     problem_description = models.TextField(null=True, blank=True)
 
     def __str__(self):
