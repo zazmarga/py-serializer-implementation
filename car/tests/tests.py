@@ -7,7 +7,7 @@ from car.serializers import CarSerializer
 
 class TestSerializer(TestCase):
 
-    def setUp(self):
+    def setUp(self) -> None:
         self.payload = {
             "id": 1,
             "manufacturer": "Audi",
@@ -79,7 +79,7 @@ class TestSerializer(TestCase):
 
 class TestSerializerFunctions(TestCase):
 
-    def test_serialize_car(self):
+    def setUp(self) -> None:
         self.payload = {
             "id": 1,
             "manufacturer": "Audi",
@@ -89,6 +89,7 @@ class TestSerializerFunctions(TestCase):
             "problem_description": "test description",
         }
 
+    def test_serialize_car(self):
         car = Car(**self.payload)
         result = '{"id":1,"manufacturer":"Audi","model":"A4","horse_powers":200,' \
                  '"is_broken":true,"problem_description":"test description"}'
@@ -99,16 +100,9 @@ class TestSerializerFunctions(TestCase):
         json = b'{"id":1,"manufacturer":"Audi","model":"A4",' \
                     b'"horse_powers":200,"is_broken":true,"problem_description":"test description"}'
 
-        serializer = deserialize_car_object(json)
+        car = deserialize_car_object(json)
 
-        self.assertTrue(serializer.is_valid())
-        self.assertEqual(
-            serializer.data,
-            {
-                "manufacturer": "Audi",
-                "model": "A4",
-                "horse_powers": 200,
-                "is_broken": True,
-                "problem_description": "test description",
-            },
-        )
+        for field in self.payload:
+            with self.subTest(field):
+                self.assertEqual(getattr(car, field), self.payload[field])
+        self.assertIsInstance(car, Car)

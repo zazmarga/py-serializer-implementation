@@ -18,4 +18,4 @@ and `problem_description` should not be required.
 
 Also, you should implement 2 functions that use `CarSerializer` in `main.py`:
 - the first one `serialize_car_object` accepts `Car` object and returns `json` with its data.
-- the second one `deserialize_car_object` accepts `json` and returns serializer with data from `json`.
+- the second one `deserialize_car_object` accepts `json` and returns `Car` instance.
