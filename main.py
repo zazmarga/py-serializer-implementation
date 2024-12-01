@@ -1,10 +1,15 @@
 import os
 import django
+from typing import TYPE_CHECKING
 
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "car_service.settings")
 
 django.setup()
+
+if TYPE_CHECKING:
+    from car.models import Car
+
 
 def serialize_car_object(car: "Car") -> bytes:
     from rest_framework.renderers import JSONRenderer
