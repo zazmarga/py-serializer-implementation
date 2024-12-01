@@ -1,10 +1,4 @@
-import os
-import django
-
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "car_service.settings")
-
-django.setup()
-
+import initial
 
 from rest_framework.renderers import JSONRenderer
 from rest_framework.parsers import JSONParser
